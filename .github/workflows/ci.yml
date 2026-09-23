@@ -1,0 +1,23 @@
+name: CI Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v3
+
+      - name: Check if main HTML file exists
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html exists. CI Check Passed!"
+          else
+            echo "Error: index.html is missing!"
+            exit 1
+          fi
